@@ -60,6 +60,6 @@ class Board:
         
         return None
     
-    def get_valid_moves(self,piece):
+    # def get_valid_moves(self,piece):
 
     
