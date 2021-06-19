@@ -1,5 +1,5 @@
 import pygame
-from .constants import BLACK,ROWS,RED,SQUARE_SIZE,COLS,WHITE
+from .constants import BLACK,ROWS,RED,SQUARE_SIZE,COLS,WHITE, GREY
 from .piece import Piece
 
 class Board:
@@ -13,7 +13,7 @@ class Board:
         win.fill(BLACK)
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
-                pygame.draw.rect(win,RED,(row*SQUARE_SIZE,col*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE))
+                pygame.draw.rect(win,GREY,(row*SQUARE_SIZE,col*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE))
 
     def move(self,piece,row,col):
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col],self.board[piece.row][piece.col]
@@ -43,7 +43,7 @@ class Board:
                 if piece != 0:
                     piece.draw(win)
     
-    def remove(self,piece):
+    def remove(self,pieces):
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
             if piece != 0:
@@ -61,5 +61,19 @@ class Board:
         return None
     
     # def get_valid_moves(self,piece):
+
+    def _horizontal_left(self, start, stop, step, color, left):
+        moves = {}
+        return moves
+
+    
+
+
+    #RULES:
+    " - Can move to an unoccupied space horizontally / vertically / diagonally"
+    " - Capture by moving around any of the loops on the board until an opponent's piece is reached which is captured"
+    " - All spaces between the start of the move and the piece being captured must be empty"
+    " - No limit on the number of empty spaces or loops that a piece can travel across during the capture move"
+    " - If more than 1 opponent piece is in a row during capture move, a player can capture all the pieces until there is a break in the row"
 
     
