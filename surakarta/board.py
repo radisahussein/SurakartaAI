@@ -10,8 +10,9 @@ class Board:
         self.create_board()
 
     def draw_squares(self, win):
+
         background_image = pygame.image.load("image/surakarta_board.jpg").convert()
-        win.blit(background_image, [0, 0])
+        win.blit(background_image, (0,0))
         # board_surf = pygame.Surface((SQUARE_SIZE*6, SQUARE_SIZE*6))
         # win.blit(board_surf, BOARD_POS)
 

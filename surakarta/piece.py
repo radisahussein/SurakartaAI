@@ -14,8 +14,8 @@ class Piece:
         self.calc_pos()
     
     def calc_pos(self):
-        self.x = SQUARE_SIZE * self.col + SQUARE_SIZE // 2
-        self.y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
+        self.x = SQUARE_SIZE * self.col + 150 + SQUARE_SIZE  // 2 
+        self.y = SQUARE_SIZE * self.row + 150 + SQUARE_SIZE  // 2
     
     def draw(self,win):
         radius = SQUARE_SIZE//2 - self.PADDING
@@ -29,3 +29,12 @@ class Piece:
     
     def __repr__(self):
         return str(self.color)
+
+
+# x = (100 * row) + 150 + (100 // 2)
+# x - (100 // 2) = (100 * row) + 150
+# x - (100//2) - 150 = 100 * row
+# x - 200 = 100 * row
+# x - 200 // 100 = row
+# x = 100 * r + 200
+#  r = (x - 200) / 100

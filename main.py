@@ -12,8 +12,9 @@ pygame.display.set_caption('Surakarta Board Game')
 
 def get_row_col_from_mouse(pos):
     x, y = pos
-    row = y // SQUARE_SIZE
-    col = x // SQUARE_SIZE
+    row = (y - 200) // (SQUARE_SIZE) 
+    col = (x - 200) // (SQUARE_SIZE) 
+    print(row,col)
     return row, col
 
 def main():
@@ -27,9 +28,9 @@ def main():
         # pygame.display.flip()
         clock.tick(FPS)
 
-        # if game.turn == WHITE:
-        #     value, new_board = minimax(game.get_board(), 2, WHITE, game)
-        #     game.ai_move(new_board)
+        if game.turn == WHITE:
+            value, new_board = minimax(game.get_board(), 2, WHITE, game)
+            game.ai_move(new_board)
 
         if game.winner() != None:
             print(game.winner())
@@ -42,6 +43,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
+                print(pos)
                 game.select(row, col)
 
         game.update()
