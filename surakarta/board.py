@@ -214,3 +214,12 @@ class Board:
 
         return moves
 
+
+    #RULES:
+    " - Can move to an unoccupied space horizontally / vertically / diagonally"
+    " - Capture by moving around any of the loops on the board until an opponent's piece is reached which is captured"
+    " - All spaces between the start of the move and the piece being captured must be empty"
+    " - No limit on the number of empty spaces or loops that a piece can travel across during the capture move"
+    " - If more than 1 opponent piece is in a row during capture move, a player can capture all the pieces until there is a break in the row"
+
+    
