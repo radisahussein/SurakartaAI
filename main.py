@@ -64,13 +64,12 @@ def simulate():
                 run = False
 
             if (game.turn == WHITE):
-                value, new_board = minimax(game.get_board(), 3, WHITE, game)
+                value, new_board = minimax(game.get_board(), 2, WHITE, game)
                 game.ai_move(new_board)
                 move_white += 1
             
                 print("Move White Counter: " + str(move_white))
-
-                game.update()            
+            
 
             elif game.turn == RED:
 
@@ -81,13 +80,16 @@ def simulate():
 
                 print("Move Red Counter: " + str(move_red))
 
-                game.update()
+            
+
+            game.update()
     
     
     print("Games Played: " + str(totalGames))
     print("Red Won: " + str(red_win))
     print("White Won: " + str(white_win))
     print(gameList)
+    pygame.quit()
         
 
 

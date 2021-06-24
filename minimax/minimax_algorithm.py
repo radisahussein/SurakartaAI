@@ -22,6 +22,8 @@ def minimax(position, depth, max_player, game):
             if maxEval == evaluation:
                 best_move = move
 
+        # print('best')
+        # print(best_move)
         return maxEval, best_move
     else:
         minEval = float('inf')
@@ -32,7 +34,7 @@ def minimax(position, depth, max_player, game):
             if minEval == evaluation:
                 best_move = move
 
-        # print(best_move)
+
         return minEval, best_move
 
 def minimax1(position,depth,max_player,game):
@@ -61,12 +63,13 @@ def minimax1(position,depth,max_player,game):
                 best_move = move
 
         # print(best_move)
+
         return minEval, best_move
 
 def randomMove(position, game):
 
     if position.winner() != None:
-        return position.evaluate(),position
+        return position.evaluate(), position
 
     else:
         randomMove = None
