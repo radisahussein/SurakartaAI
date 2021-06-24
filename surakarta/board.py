@@ -115,7 +115,7 @@ class Board:
             moves.update(self._check_eatable_horizontal(col -1, max(piece.col-6, -1), -1, piece.row, piece.color, 0))
             moves.update(self._check_eatable_horizontal(col + 1, min(piece.col+6, COLS), 1, piece.row, piece.color, 0))
 
-        print(moves)
+        # print(moves)
         return moves
 
     def _check_eatable_vertical(self, start, stop, step, col, color, count):
@@ -156,7 +156,7 @@ class Board:
                             moves.update(self._check_eatable_horizontal(0, min(last[0][1]+6, COLS), 1, col, color, count + 1))
                 elif current.color == color:
                     break
-        print(moves)
+        # print(moves)
         return moves
 
     def _check_eatable_horizontal(self, start, stop, step, row, color, count):
@@ -195,7 +195,7 @@ class Board:
                             moves.update(self._check_eatable_vertical(ROWS, max(last[0][0]-6,-1), -1, COLS - row, color, count + 1))
                         elif last[0][1] == 0 and last[0][0] <= 2:
                             moves.update(self._check_eatable_vertical(0, min(last[0][0]+6,ROWS), 1, row, color, count + 1))
-        print(moves)
+        # print(moves)
         return moves
 
     def _check_moves(self, go_row, go_col):
