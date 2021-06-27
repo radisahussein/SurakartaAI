@@ -67,30 +67,48 @@ def minimax1(position,depth,max_player,game):
         return minEval, best_move
 
 def alphabeta(position,depth,alpha,beta,max_player,game):
+
+    al = alpha
+    be = beta
+
     if depth == 0 or position.winner() != None:
         return position.evaluate(), position
     
     if max_player:
-        maxEval = float('inf')
+        maxEval = float('-inf')
         best_move = None
-        for move in get_all_moves(position, WHITE, game):
-            evaluation = alphabeta(move,depth-1,alpha,beta,True,game)
-            maxEval = max(maxEval, eval)
-            alpha = max(alpha,eval)
+        for move in get_all_moves(position, RED, game):
+            evaluation = alphabeta(move,depth-1,al,be,True,game)[0]
+            maxEval = max(maxEval, evaluation)
+            alpha = max(alpha,evaluation)
             if beta <= alpha:
+                best_move = move
                 break
         
-        return best_move
+        return maxEval,best_move
+    
+    else:
+        minEval = float('inf')
+        best_move = None
+        for move in get_all_moves(position,WHITE,game):
+            evaluation = alphabeta(move,depth-1,al,be,True,game)[0]
+            minEval = min(beta,evaluation)
+            beta = min(beta,evaluation)
+            if beta <= alpha:
+                best_move = move
+                break
         
+        return minEval,best_move
 
-def randomMove(position, game):
+
+def randomMove(position, color, game):
 
     if position.winner() != None:
         return position.evaluate(), position
 
     else:
         randomMove = None
-        possibleMoves = get_all_moves(position,RED,game)
+        possibleMoves = get_all_moves(position,color,game)
         arrLen = len(possibleMoves)
 
         if(arrLen != 0):
@@ -98,6 +116,7 @@ def randomMove(position, game):
             randomMove = possibleMoves[randomIndex]
                 
             return randomIndex, randomMove
+        
 
 
 # def simulate_move(temp_piece, move, temp_board, game, valid):

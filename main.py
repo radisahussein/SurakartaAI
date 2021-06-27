@@ -1,7 +1,7 @@
 import pygame
 from surakarta.constants import WIDTH,HEIGHT,SQUARE_SIZE,RED, WHITE, W_BCKGRND, H_BCKGRND, BOARD_POS
 from surakarta.game import Game
-from minimax.minimax_algorithm import minimax,minimax1,randomMove
+from minimax.minimax_algorithm import minimax,minimax1,randomMove,alphabeta
 import time
 
 # push
@@ -62,7 +62,7 @@ def simulate():
                     white_win += 1
                 
                 print('Time Taken: ' + str(end-start))
-                gameList.append([game.winner(), (end-start)])
+                gameList.append([game.winner(), (end-start), move_red])
 
                 run = False
 
@@ -76,7 +76,7 @@ def simulate():
 
             elif game.turn == RED:
 
-                value, new_board = randomMove(game.get_board(),game)
+                value, new_board = randomMove(game.get_board(),RED,game)
                 game.ai_move(new_board)
 
                 move_red += 1
@@ -95,9 +95,154 @@ def simulate():
     pygame.quit()
         
 
+def randoms():
 
+    totalGames = 0
+    red_win = 0
+    white_win = 0
+    gameList = []
 
+    for i in range(20):
 
+        run = True
+        clock = pygame.time.Clock()
+        game = Game(WIN)
+        move_red = 0
+        move_white = 0
+
+        print("==================================")
+        print("Games Played: " + str(totalGames))
+        print("Red Won: " + str(red_win))
+        print("White Won: " + str(white_win))
+        print("==================================")
+
+        #record time
+        start = time.time()
+
+        while run:
+
+            clock.tick(FPS)
+
+            if game.winner() != None:
+
+                end = time.time()
+
+                totalGames += 1
+
+                if game.winner() == RED:
+                    red_win += 1
+                
+                else:
+                    white_win += 1
+                
+                print('Time Taken: ' + str(end-start))
+                gameList.append([str(game.winner()), (end-start), move_red])
+
+                run = False
+
+            if (game.turn == WHITE):
+                value, new_board = randomMove(game.get_board(),WHITE,game)
+                game.ai_move(new_board)
+                move_white += 1
+            
+                print("Move White Counter: " + str(move_white))
+            
+
+            elif game.turn == RED:
+
+                value, new_board = randomMove(game.get_board(),RED,game)
+                game.ai_move(new_board)
+
+                move_red += 1
+
+                print("Move Red Counter: " + str(move_red))
+
+            
+
+            game.update()
+    
+    
+    print("Games Played: " + str(totalGames))
+    print("Red Won: " + str(red_win))
+    print("White Won: " + str(white_win))
+    print(gameList)
+    pygame.quit()   
+
+def alphasim():
+
+    totalGames = 0
+    red_win = 0
+    white_win = 0
+    gameList = []
+
+    for i in range(20):
+
+        pinf = float('inf')
+        ninf = float('-inf')
+
+        run = True
+        clock = pygame.time.Clock()
+        game = Game(WIN)
+        move_red = 0
+        move_white = 0
+
+        print("==================================")
+        print("Games Played: " + str(totalGames))
+        print("Red Won: " + str(red_win))
+        print("White Won: " + str(white_win))
+        print("==================================")
+
+        #record time
+        start = time.time()
+
+        while run:
+
+            clock.tick(FPS)
+
+            if game.winner() != None:
+
+                end = time.time()
+
+                totalGames += 1
+
+                if game.winner() == RED:
+                    red_win += 1
+                
+                else:
+                    white_win += 1
+                
+                print('Time Taken: ' + str(end-start))
+                gameList.append([str(game.winner()), (end-start), move_red])
+
+                run = False
+
+            if (game.turn == WHITE):
+                value, new_board = randomMove(game.get_board(),WHITE,game)
+                game.ai_move(new_board)
+                move_white += 1
+            
+                print("Move White Counter: " + str(move_white))
+            
+
+            elif game.turn == RED:
+
+                value, new_board = alphabeta(game.get_board(),2,ninf,pinf, RED, game)
+                game.ai_move(new_board)
+
+                move_red += 1
+
+                print("Move Red Counter: " + str(move_red))
+
+            
+
+            game.update()
+    
+    
+    print("Games Played: " + str(totalGames))
+    print("Red Won: " + str(red_win))
+    print("White Won: " + str(white_win))
+    print(gameList)
+    pygame.quit()   
 
 def main():
     run = True
@@ -137,4 +282,12 @@ def main():
 
 # main()
 
-simulate()
+
+#AI Minimax vs Random
+# simulate()
+
+#Random vs Random
+# randoms()
+
+#Alpha Beta vs Random
+alphasim()
