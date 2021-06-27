@@ -35,10 +35,11 @@ def simulate():
         move_red = 0
         move_white = 0
 
-
+        print("==================================")
         print("Games Played: " + str(totalGames))
         print("Red Won: " + str(red_win))
         print("White Won: " + str(white_win))
+        print("==================================")
 
         #record time
         start = time.time()
@@ -58,7 +59,8 @@ def simulate():
                 
                 else:
                     white_win += 1
-
+                
+                print('Time Taken: ' + str(end-start))
                 gameList.append([game.winner(), (end-start)])
 
                 run = False
@@ -73,7 +75,7 @@ def simulate():
 
             elif game.turn == RED:
 
-                new_board = randomMove(game.get_board(),game)
+                value, new_board = randomMove(game.get_board(),game)
                 game.ai_move(new_board)
 
                 move_red += 1
