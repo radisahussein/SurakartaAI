@@ -4,6 +4,7 @@ from surakarta.game import Game
 from minimax.minimax_algorithm import minimax,minimax1,randomMove
 import time
 
+# push
 
 FPS = 60
 
